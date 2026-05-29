@@ -1,36 +1,99 @@
-# UrbanFix AI
+<div align="center">
 
-UrbanFix AI est une plateforme web d'analyse et de renovation intelligente des espaces urbains. Le projet combine un backend FastAPI, un frontend Next.js et plusieurs services IA pour detecter les problemes urbains, generer des scenarios de renovation, estimer les couts, produire de l'audio, de la video et des rapports PDF.
+# 🏙️ UrbanFix AI
 
-## Fonctionnalites principales
+**Plateforme intelligente de détection et de rénovation des espaces urbains**
 
-- Detection automatique des problemes urbains avec YOLOv8.
-- Generation de scenarios visuels avec SDXL + LoRA.
-- Estimation des couts en TND via Llama 3.1 sur Groq.
-- Generation d'une narration audio.
-- Generation d'une video avant/apres.
-- Production de rapports PDF complets.
-- Suivi du pipeline en temps reel via API et WebSocket.
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Detection-FF6B35?style=flat-square)](https://github.com/ultralytics/ultralytics)
+[![SDXL](https://img.shields.io/badge/SDXL-LoRA-8B5CF6?style=flat-square)](https://arxiv.org/abs/2307.01952)
+[![License](https://img.shields.io/badge/Licence-MIT-green?style=flat-square)](LICENSE)
 
-## Architecture du projet
+> Projet de Fin d'Études · ENET'COM Sfax · Ingénierie des Données et Systèmes Décisionnels
 
-- `backend/` : API FastAPI, services IA, modeles, tests et documentation technique.
-- `frontend/` : application Next.js pour l'interface utilisateur.
-- `docs/` : documentation LoRA et autres notes de projet.
-- `scripts/` : scripts PowerShell et utilitaires de demo.
-- `datasets/`, `data/`, `uploads/`, `outputs/`, `temp/` : donnees locales, artefacts et sorties generees.
+[Démo](#pipeline-de-démo) · [Installation](#installation) · [Documentation API](#documentation) · [Architecture](#architecture)
 
-## Prerequis
+</div>
 
-- Windows 10/11 avec PowerShell 5.1+.
-- Python 3.10 ou plus recent.
-- Node.js 18+ et npm.
-- Git.
-- Optionnel: GPU NVIDIA pour les taches IA lourdes.
+---
 
-## Installation rapide
+## 🎯 À propos du projet
 
-### 1. Backend
+**UrbanFix AI** transforme une simple photographie d'un espace urbain dégradé en un **dossier d'aide à la décision complet**, le tout en moins de 4 minutes.
+
+Conçu pour les municipalités tunisiennes et les citoyens, le système automatise l'ensemble du pipeline : détection des anomalies, génération de scénarios de rénovation visuels, estimation budgétaire en dinars tunisiens (TND), narration audio et production de rapports PDF professionnels.
+
+### Problème résolu
+
+Les collectivités locales tunisiennes s'appuient encore sur des inspections manuelles coûteuses, des rapports papier et des études de faisabilité s'étirant sur plusieurs mois. UrbanFix AI réduit ce cycle à quelques minutes, avec une interface accessible aux techniciens comme aux citoyens.
+
+---
+
+## ✨ Fonctionnalités
+
+| Fonctionnalité | Technologie | Description |
+|---|---|---|
+| 🔍 **Détection automatique** | YOLOv8 | Identification des dégradations urbaines sur photo |
+| 🎨 **Scénarios de rénovation** | SDXL + LoRA `tnrenovation` | Génération d'images photoréalistes avant/après |
+| 💰 **Estimation budgétaire** | Llama 3.3 70B (Groq) | Chiffrage en dinars tunisiens par type de travaux |
+| 🔊 **Narration audio** | Bark TTS | Synthèse vocale du rapport de diagnostic |
+| 🎬 **Vidéo avant/après** | Pipeline vidéo | Comparaison animée de l'espace rénové |
+| 📄 **Rapport PDF** | ReportLab | Dossier structuré et professionnel |
+| 📡 **Suivi en temps réel** | WebSocket + FastAPI | Progression du pipeline étape par étape |
+
+---
+
+## 🏗️ Architecture
+
+```
+UrbanFix AI
+├── backend/              # API FastAPI + services IA
+│   ├── app/
+│   │   ├── api/          # Endpoints REST & WebSocket
+│   │   ├── services/     # YOLOv8, SDXL, Llama, Bark, PDF
+│   │   └── models/       # Schémas Pydantic & ORM
+│   ├── tests/            # Tests unitaires et d'intégration
+│   ├── requirements.txt
+│   └── API_DOCUMENTATION.md
+├── frontend/             # Application Next.js 14
+│   ├── app/              # App Router (pages & layouts)
+│   ├── components/       # Composants réutilisables
+│   └── public/
+├── docs/                 # Documentation LoRA, guides techniques
+│   └── SDXL_LORA_TRAINING.md
+├── scripts/              # Scripts de lancement & démo (PowerShell)
+│   ├── run_backend.ps1
+│   ├── run_frontend.ps1
+│   └── seed_demo_data.py
+└── datasets/             # Données locales (non commitées, voir .gitignore)
+```
+
+> **Note :** Les dossiers `data/`, `uploads/`, `outputs/`, `temp/`, `runs/` et les poids de modèles sont exclus du dépôt Git (données volumineuses et artefacts locaux).
+
+---
+
+## ⚙️ Prérequis
+
+- **OS :** Windows 10/11 avec PowerShell 5.1+
+- **Python :** 3.10 ou supérieur
+- **Node.js :** 18+ et npm
+- **Git**
+- **GPU NVIDIA** *(optionnel, recommandé pour l'inférence SDXL et YOLOv8)*
+
+---
+
+## 🚀 Installation
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/<votre-username>/urbanfix-ai.git
+cd urbanfix-ai
+```
+
+### 2. Backend (FastAPI)
 
 ```powershell
 cd backend
@@ -39,102 +102,115 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-Creer ensuite un fichier `.env` dans `backend/` avec au minimum les variables utiles a votre configuration:
+Créer le fichier `.env` dans `backend/` :
 
 ```env
 APP_NAME=UrbanFix AI
-PROJECT_NAME=UrbanFix AI
 VERSION=1.0.0
 DEBUG=True
 DATABASE_URL=sqlite:///./urbanfix.db
-SECRET_KEY=changez-cette-cle-secrete-en-production-utilisez-secrets-generator
-GROQ_API_KEY=your_groq_api_key_here
-HUGGINGFACE_TOKEN=your_hf_token_here
+SECRET_KEY=your-secret-key-here
+
+# Clés API externes
+GROQ_API_KEY=your_groq_api_key
+HUGGINGFACE_TOKEN=your_hf_token
 ```
 
-### 2. Frontend
+> 🔑 Obtenez votre clé Groq sur [console.groq.com](https://console.groq.com) et votre token HuggingFace sur [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
+
+### 3. Frontend (Next.js)
 
 ```powershell
 cd frontend
 npm install
 ```
 
-Le frontend utilise les variables du fichier `frontend/.env.local`.
-
-Exemple:
+Créer le fichier `frontend/.env.local` :
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api/v1
 ```
 
-## Lancement en local
+---
 
-La facon la plus simple sur Windows est d'utiliser les scripts fournis a la racine du projet:
+## ▶️ Lancement en local
 
 ```powershell
+# Terminal 1 — Backend
 .\scripts\run_backend.ps1
+
+# Terminal 2 — Frontend
 .\scripts\run_frontend.ps1
 ```
 
-Ensuite, ouvrez:
+| Service | URL |
+|---|---|
+| Interface utilisateur | http://localhost:3000 |
+| API REST | http://localhost:8000 |
+| Swagger UI | http://localhost:8000/docs |
+| ReDoc | http://localhost:8000/redoc |
 
-- Frontend: `http://localhost:3000`
-- API: `http://localhost:8000`
-- Swagger: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+---
 
-## Pipeline de demo
+## 🎬 Pipeline de démo
 
-Pour remplir des donnees de demo, vous pouvez lancer:
+Alimenter la base avec des données de démonstration :
 
 ```powershell
 python .\scripts\seed_demo_data.py
 ```
 
-Pour declencher un traitement offline de demo sur un signalement:
+Déclencher un traitement complet sur un signalement de démo :
 
 ```powershell
 python .\scripts\seed_demo_data.py --run-process
 ```
 
-## Tests
+---
 
-### Backend
+## 🧪 Tests
 
 ```powershell
+# Tests backend
 cd backend
 pytest -q
-```
 
-### Frontend
-
-```powershell
+# Build de vérification frontend
 cd frontend
 npm run build
-```
 
-### Verification rapide
-
-```powershell
+# Health check rapide
 curl http://localhost:8000/health
 ```
 
-## Documentation utile
+---
 
-- [API backend](backend/API_DOCUMENTATION.md)
-- [Services backend](backend/SERVICES_README.md)
-- [Guide LoRA SDXL](docs/SDXL_LORA_TRAINING.md)
-- [Checklist de demo](DEMO_CHECKLIST.md)
-- [Correction WinError 32](WINDOWS_WINERROR32_FIX.md)
+## 📚 Documentation
 
-## Gestion des fichiers locaux
+| Ressource | Lien |
+|---|---|
+| Documentation API | [backend/API_DOCUMENTATION.md](backend/API_DOCUMENTATION.md) |
+| Services backend | [backend/SERVICES_README.md](backend/SERVICES_README.md) |
+| Guide fine-tuning LoRA SDXL | [docs/SDXL_LORA_TRAINING.md](docs/SDXL_LORA_TRAINING.md) |
+| Checklist démo | [DEMO_CHECKLIST.md](DEMO_CHECKLIST.md) |
+| Fix WinError 32 | [WINDOWS_WINERROR32_FIX.md](WINDOWS_WINERROR32_FIX.md) |
 
-Les dossiers `data/`, `datasets/`, `uploads/`, `outputs/`, `temp/`, `runs/` et les poids de modeles doivent rester locaux et ne pas etre commits.
+---
 
-## Notes LoRA
+## 🤖 Modèle LoRA — `tnrenovation`
 
-Le projet contient une base pour le fine-tuning SDXL LoRA autour du trigger token `tnrenovation`. Le guide de reference est dans `docs/SDXL_LORA_TRAINING.md`.
+Le projet inclut un modèle LoRA fine-tuné sur SDXL, entraîné sur un dataset de 199 images d'espaces urbains tunisiens collectées via l'API Unsplash. Le trigger token `tnrenovation` oriente la génération vers les codes esthétiques de la rénovation urbaine locale.
 
-## Licence
+Guide complet : [docs/SDXL_LORA_TRAINING.md](docs/SDXL_LORA_TRAINING.md)
 
-Ce projet est fourni dans le cadre du developpement UrbanFix AI. Ajoutez ici la licence officielle si elle est definie pour votre depot.
+---
+
+## 👤 Auteur
+
+Projet réalisé dans le cadre d'un **Projet de Fin d'Études (PFA)** à l'**École Nationale d'Électronique et des Télécommunications de Sfax (ENET'COM)**, filière Ingénierie des Données et Systèmes Décisionnels.
+
+---
+
+## 📄 Licence
+
+Ce projet est distribué sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
