@@ -207,7 +207,7 @@ Guide complet : [docs/SDXL_LORA_TRAINING.md](docs/SDXL_LORA_TRAINING.md)
 
 ## 👤 Auteur
 
-Projet réalisé dans le cadre d'un **Projet de Fin d'Études (PFA)** à l'**École Nationale d'Électronique et des Télécommunications de Sfax (ENET'COM)**, filière Ingénierie des Données et Systèmes Décisionnels.
+Projet réalisé dans le cadre d'un **Projet de Fin d'année (PFA)** à l'**École Nationale d'Électronique et des Télécommunications de Sfax (ENET'COM)**, filière Ingénierie des Données et Systèmes Décisionnels.
 
 ---
 
